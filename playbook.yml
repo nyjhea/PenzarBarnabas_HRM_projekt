@@ -1,0 +1,9 @@
+---
+
+- name: Felcsatolás fstab-ba 
+  hosts: servers
+
+  roles:
+    - role1
+
+

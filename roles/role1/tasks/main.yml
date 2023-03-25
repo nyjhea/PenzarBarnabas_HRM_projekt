@@ -1,0 +1,48 @@
+---
+
+- name: Csomag install
+  dnf:
+    name: samba
+    state: present
+
+- name: Szolg elinditas
+  service:
+    name: smb.service
+    state: started
+    enabled: true
+
+- name: Samba a tűzfalon
+  firewalld:
+    service: samba
+    immediate: true
+    permanent: true
+    state: enabled
+
+- name: Samba megosztott mappa
+  file:
+    path: /sambashare/fontos
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+    setype: "samba_share_t"
+
+- name: Konfig sorok
+  blockinfile:
+    path: /etc/samba/smb.conf
+    block: |
+      [fontos]
+      path = /sambashare/fontos
+      writeable = yes
+      public = yes
+      valid users = fonok root
+      browseable = yes
+
+- name: Szolg ujrain
+  service:
+    name: smb.service
+    state: restarted
+
+
+
+

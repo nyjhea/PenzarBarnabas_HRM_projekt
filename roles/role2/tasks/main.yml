@@ -1,0 +1,18 @@
+---
+
+- name: Mappa létrehozása
+  file:
+    path: "{{ var_mappa }}"
+    state: directory
+    owner: "{{ var_tul }}"
+    group: "{{ var_grptul }}"
+    mode: "{{ var_jogok }}"
+
+- name: Beírás fstab-ba
+  lineinfile:
+    path: "{{ var_fajl }}"
+    line: "{{ var_sor }}"
+    state: present
+  notify: Ujrainditas
+
+

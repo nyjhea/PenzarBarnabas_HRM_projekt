@@ -1,0 +1,9 @@
+---
+
+var_mappa: /data
+var_tul: root
+var_grptul: root
+var_jogok: 660
+var_fajl: /etc/fstab
+var_sor: "/dev/vdb1 /data xfs defaults 0 0"
+
